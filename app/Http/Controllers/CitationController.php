@@ -11,10 +11,10 @@ class CitationController extends Controller
 		'ble ble ble',
 		'bli bli bli'
 	];
-    public function show($array)
+    public function show()
 	{
-		$index = rand(0, count($array) - 1);
-		$citation = $array[$index];
+		$index = rand(0, count($this->array) - 1);
+		$citation = $this->array[$index];
 		return view('inspire', compact('citation') );
 
 	}
