@@ -12,12 +12,19 @@
         </thead>
         <tbody>
         @foreach($books as $book)
+
         <tr>
             <th scope="row"><a href="{{ route('show_book', ['id' => $book->id]) }}">{{ $book->id }}</a></th>
             <td>{{ $book->title }}</td>
             <td>{{ $book->author }}</td>
             <td>{{ $book->isbn }}</td>
+            <form method="post" action="{{ route('delete_book', ['id' => $book->id])}}">
+                <input type="hidden" name="_method" value="delete" />
+                @csrf
+            <td><button type="submit" class="btn btn-danger">Delete</button><td>
+            </form>
         </tr>
+
         @endforeach
         </tbody>
     </table>

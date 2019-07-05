@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class BookController extends Controller
 {
@@ -75,7 +76,9 @@ class BookController extends Controller
      */
     public function edit($id)
     {
-        //
+		$book = Book::findOrFail($id);
+
+		return view('pages.edit', compact('book'));
     }
 
     /**
@@ -87,7 +90,14 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+		$book = Book::find($id);
+
+		$book->title = $request->title;
+		$book->author = $request->author;
+		$book->isbn = $request->isbn;
+		$book->save();
+
+		return redirect()->to('/books');
     }
 
     /**
@@ -98,6 +108,8 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        dd('destroyed');
+		$id = Book::where('id', $id)->first();
+		$id->delete();
+		return redirect('/books');
     }
 }
