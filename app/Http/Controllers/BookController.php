@@ -78,7 +78,8 @@ class BookController extends Controller
     {
 		$book = Book::findOrFail($id);
 
-		return view('pages.edit', compact('book'));
+		//return view('pages.edit', compact('book'));
+		return view('pages.edit')->with('book', $book);
     }
 
     /**
@@ -90,6 +91,8 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+
 		$book = Book::find($id);
 
 		$book->title = $request->title;
